@@ -32,7 +32,7 @@ function App() {
       // In production, Vite will replace this with the value from your build environment
       const API_BASE_URL = import.meta.env.VITE_APP_API_URL;
       if (!API_BASE_URL) {
-        throw new Error('API base URL is not defined. Please check your environment variablesss.');
+        throw new Error('API base URL is not defined. Please check your environment variables.');
       }
       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
