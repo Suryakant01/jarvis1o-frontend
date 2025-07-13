@@ -3,7 +3,7 @@ import './App.css'; // Import the CSS file
 
 function App() {
   const [messages, setMessages] = useState([
-    { text: "Hello! I'm Jarvis 1o. How can I help you today?", sender: "bot" }
+    { text: "Hello! I'm your personal FAQ bot for Suryakant. How can I help you today?", sender: "bot" }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +27,12 @@ function App() {
     setIsLoading(true);
 
     try {
-      // The backend URL is the same
-      const response = await fetch('http://localhost:5001/api/chat', {
+      // Use environment variable for the backend URL
+      // In development, this will be 'http://localhost:5001' from .env
+      // In production, Vite will replace this with the value from your build environment
+      const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:5001';
+      
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +60,7 @@ function App() {
   return (
     <div className="chatbot-container">
       <div className="chatbot-header">
-        <h2>Know About Me</h2>
+        <h2>Suryakant's FAQ Chatbot</h2>
       </div>
       <div className="chatbot-messages">
         {messages.map((message, index) => (
@@ -76,8 +80,8 @@ function App() {
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Ask a question..."
-          aria-label="Ask a question"
+          placeholder="Ask a question about Suryakant..."
+          aria-label="Ask a question about Suryakant"
           disabled={isLoading}
         />
         <button type="submit" disabled={isLoading}>Send</button>
