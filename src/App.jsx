@@ -3,7 +3,7 @@ import './App.css'; // Import the CSS file
 
 function App() {
   const [messages, setMessages] = useState([
-    { text: "Hello! I'm your personal FAQ bot for Suryakant. How can I help you today?", sender: "bot" }
+    { text: "Hello! I'm Jarvis. Ask me anything about Suryakant.", sender: "bot" }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -30,8 +30,10 @@ function App() {
       // Use environment variable for the backend URL
       // In development, this will be 'http://localhost:5001' from .env
       // In production, Vite will replace this with the value from your build environment
-      const API_BASE_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:5001';
-      
+      const API_BASE_URL = import.meta.env.VITE_APP_API_URL;
+      if (!API_BASE_URL) {
+        throw new Error('API base URL is not defined. Please check your environment variablesss.');
+      }
       const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: {
@@ -60,7 +62,7 @@ function App() {
   return (
     <div className="chatbot-container">
       <div className="chatbot-header">
-        <h2>Suryakant's FAQ Chatbot</h2>
+        <h2>Jarvis1o</h2>
       </div>
       <div className="chatbot-messages">
         {messages.map((message, index) => (
